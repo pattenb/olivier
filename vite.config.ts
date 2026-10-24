@@ -6,7 +6,7 @@ import {defineConfig} from 'vite';
 export default defineConfig(() => {
   return {
     // ADD YOUR GITHUB REPO NAME HERE
-    base: '/your-repo-name/',
+    base: '/olivier/',
     
     plugins: [react(), tailwindcss()],
     resolve: {
