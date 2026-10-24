@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --app-font-serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --app-font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+[data-font="cormorant"] {
+  --app-font-serif: "Cormorant Garamond", Georgia, serif;
+}
+
+[data-font="syne"] {
+  --app-font-serif: "Syne", sans-serif;
+}
+
+[data-font="bodoni"] {
+  --app-font-serif: "Bodoni Moda", Georgia, serif;
+}
+
+[data-font="dmserif"] {
+  --app-font-serif: "DM Serif Display", Georgia, serif;
+}
+
+[data-font="bricolage"] {
+  --app-font-serif: "Bricolage Grotesque", sans-serif;
+}
+
+[data-font="cinzel"] {
+  --app-font-serif: "Cinzel", Georgia, serif;
+}
+
+[data-font="playfair"] {
+  --app-font-serif: "Playfair Display", Georgia, serif;
+}
+
+[data-font="space"] {
+  --app-font-serif: "Space Grotesk", sans-serif;
+}
+
+@theme {
+  --font-sans: var(--app-font-sans), "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--app-font-serif), "Cormorant Garamond", Georgia, serif;
+  --font-display: var(--app-font-serif), "Cormorant Garamond", Georgia, serif;
+  --font-mono: "Space Grotesk", monospace;
+  --font-logo: "Montserrat", sans-serif;
+  --font-bodoni: var(--app-font-serif), "Cormorant Garamond", Georgia, serif;
+}
+
+@utility font-logo {
+  font-family: "Montserrat", "Space Grotesk", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.font-logo-banner {
+  font-family: "Montserrat", "Space Grotesk", sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.03em;
+}
+
+/* Custom scrollbar matching the dark industrial theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #09090b; /* Zinc 950 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a; /* Zinc 800 */
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46; /* Zinc 700 */
+}
+
+/* Futuristic subtle elements */
+.futuristic-grid {
+  background-image: 
+    linear-gradient(to right, rgba(39, 39, 42, 0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(39, 39, 42, 0.2) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.glow-hover {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glow-hover:hover {
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes slow-pan {
+  0% { transform: scale(1.05) translate(0, 0); }
+  50% { transform: scale(1.08) translate(-1%, -1%); }
+  100% { transform: scale(1.05) translate(0, 0); }
+}
+
+.animate-slow-pan {
+  animation: slow-pan 40s ease-in-out infinite;
+}
+
+@keyframes zoom-in-out {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+.animate-zoom-in-out {
+  animation: zoom-in-out 30s ease-in-out infinite;
+}
+
+/* Atmospheric subtle Ken Burns zoom and moving effect focused around artist and sculpture */
+@keyframes hero-ken-burns {
+  0% {
+    transform: scale(1.0) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.08) translate(-0.6%, -0.3%);
+  }
+  100% {
+    transform: scale(1.0) translate(0, 0);
+  }
+}
+
+.animate-hero-zoom {
+  animation: hero-ken-burns 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-zoom {
+    animation: none !important;
+  }
+}
+
+
+
