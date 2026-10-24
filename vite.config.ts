@@ -4,10 +4,12 @@ import path from 'path';
 import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
+  // Use BASE_PATH when deploying to GitHub Pages (e.g. BASE_PATH=/olivier/ npm run build).
+  // Defaults to '/' in AI Studio so all pictures, logos, and scripts load properly.
+  const base = process.env.BASE_PATH || (process.env.GITHUB_ACTIONS ? '/olivier/' : '/');
+
   return {
-    // ADD YOUR GITHUB REPO NAME HERE
-    base: '/olivier/',
-    
+    base,
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
