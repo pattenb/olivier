@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { getAssetUrl } from "../utils/asset";
 
 interface NavigationProps {
   onNavigate?: (id: string) => void;
@@ -57,7 +58,7 @@ export default function Navigation({ onNavigate }: NavigationProps) {
             id="nav-brand"
           >
             <img 
-              src="/img/logos/bohiwit.png" 
+              src={getAssetUrl("/img/logos/bohiwit.png")} 
               alt="Olivier Pauwels" 
               className="h-8 sm:h-9 md:h-10 w-auto object-contain opacity-100 group-hover:opacity-85 transition-opacity drop-shadow-md"
             />

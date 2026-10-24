@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { getAssetUrl } from "../utils/asset";
 
 export default function Biography() {
   const [inView, setInView] = useState(false);
@@ -33,7 +34,7 @@ export default function Biography() {
       {/* Background Image Layer featuring the Nick Decombel photograph of Olivier holding Mickey's */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
         <img 
-          src="/img/portfolio/19-full.jpg" 
+          src={getAssetUrl("/img/portfolio/19-full.jpg")} 
           alt="Marchal M12 — Sculpture by Olivier Pauwels" 
           className="w-full h-full object-cover object-center opacity-35 sm:opacity-40 filter contrast-[1.05]"
         />

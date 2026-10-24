@@ -1,3 +1,5 @@
+import { getAssetUrl } from "./utils/asset";
+
 export const ABOUT_TEXTS = [
   {
     title: "Olivier Pauwels (°1974)",
@@ -32,9 +34,9 @@ export const ABOUT_IMAGES = [
   "/img/about/5.jpg",
   "/img/about/6.jpg",
   "/img/about/21.jpg"
-];
+].map(getAssetUrl);
 
-export const PORTFOLIO_ITEMS = [
+const RAW_PORTFOLIO_ITEMS = [
   { id: "p1", title: "Mickey's", year: "2020", status: "Available", thumb: "/img/portfolio/28-thumbnail.jpg", full: "/img/portfolio/28-full.jpg" },
   { id: "p2", title: "Porsche Felca GT", year: "2020", status: "SOLD", thumb: "/img/portfolio/27-thumbnail.jpg", full: "/img/portfolio/27-full.jpg" },
   { id: "p3", title: "Bronze Mickey's", year: "2020", status: "Available", thumb: "/img/portfolio/26-thumbnail.jpg", full: "/img/portfolio/26a-full.jpeg" },
@@ -52,12 +54,23 @@ export const PORTFOLIO_ITEMS = [
   { id: "p15", title: "V8 Hoover Plymouth", year: "2014", status: "SOLD", thumb: "/img/portfolio/17-thumbnail.jpg", full: "/img/portfolio/17-full.jpg" }
 ];
 
-export const BOOKS = [
+export const PORTFOLIO_ITEMS = RAW_PORTFOLIO_ITEMS.map((item) => ({
+  ...item,
+  thumb: getAssetUrl(item.thumb),
+  full: getAssetUrl(item.full)
+}));
+
+const RAW_BOOKS = [
   { id: "b1", title: "Introducing Bohi", year: "2007", status: "Signed copy", image: "/img/books/bohi.jpg" },
   { id: "b2", title: "Future Pass 3.0", year: "2014", status: "Signed copy", image: "/img/books/futurepass.jpg" },
   { id: "b3", title: "Cyber-Baby I", year: "2015", status: "Sold out", image: "/img/books/cyberbaby1.jpg" },
   { id: "b4", title: "Cyber-Baby II", year: "2016", status: "Sold out", image: "/img/books/cyberbaby2.jpg" }
 ];
+
+export const BOOKS = RAW_BOOKS.map((b) => ({
+  ...b,
+  image: getAssetUrl(b.image)
+}));
 
 export const MADMAX_IMAGES = [
   "/img/madmax/1a.jpg",
@@ -72,7 +85,7 @@ export const MADMAX_IMAGES = [
   "/img/madmax/11.jpg",
   "/img/madmax/12.jpg",
   "/img/madmax/15.jpg"
-];
+].map(getAssetUrl);
 
 export const EXHIBITIONS = [
   { year: "2025", events: ["Luum Ostend, Belgium", "AAF. Brussels, Belgium", "Project 'Final Odyssey' Ettelgem, Belgium"] },

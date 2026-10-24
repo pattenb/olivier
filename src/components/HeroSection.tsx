@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { getAssetUrl } from "../utils/asset";
 
 interface SlideData {
   id: string;
@@ -17,7 +18,7 @@ interface SlideData {
 const slides: SlideData[] = [
   {
     id: "sculptor",
-    image: "/images/hero/OlivierPauwels013.webp",
+    image: getAssetUrl("/images/hero/OlivierPauwels013.webp"),
     alt: "Olivier Pauwels with Biomechanical Sculpture",
     objectPosition: "35% 15%",
     objectPositionMobile: "35% 15%",
@@ -29,7 +30,7 @@ const slides: SlideData[] = [
   },
   {
     id: "disney",
-    image: "/images/hero/OlivierDisney.webp",
+    image: getAssetUrl("/images/hero/OlivierDisney.webp"),
     alt: "Olivier Pauwels Welcome to Disneyland",
     objectPosition: "82% center",
     objectPositionMobile: "82% 35%",
@@ -41,7 +42,7 @@ const slides: SlideData[] = [
   },
   {
     id: "gt1900",
-    image: "/images/hero/headerbg1c.webp",
+    image: getAssetUrl("/images/hero/headerbg1c.webp"),
     alt: "Olivier Pauwels GT 1900 Sculpture",
     objectPosition: "center 40%",
     objectPositionMobile: "50% 40%",

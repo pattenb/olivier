@@ -10,6 +10,7 @@ import MadMax from "./components/MadMax";
 import Books from "./components/Books";
 import { PORTFOLIO_CREATURES, PortfolioCreature } from "./data/portfolioData";
 import { Mail, Instagram, Facebook, Youtube, ArrowUp, Send, CheckCircle2, ChevronRight, MessageSquareCode, ZoomIn, X } from "lucide-react";
+import { getAssetUrl, getBaseUrl } from "./utils/asset";
 
 export default function App() {
   const [selectedCreature, setSelectedCreature] = useState<PortfolioCreature | null>(null);
@@ -53,10 +54,14 @@ export default function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [selectedCreature]);
 
-  // Sync with URL pathname e.g. /name-of-the-sculpture or hash fallback
+  // Sync with URL pathname e.g. /name-of-the-sculpture or hash fallback (subpath aware)
   useEffect(() => {
     const parseRoute = () => {
-      const path = window.location.pathname.replace(/^\/+|\/+$/g, "");
+      const baseClean = (getBaseUrl() || "/").replace(/^\/+|\/+$/g, "");
+      let path = window.location.pathname.replace(/^\/+|\/+$/g, "");
+      if (baseClean && path.startsWith(baseClean)) {
+        path = path.slice(baseClean.length).replace(/^\/+|\/+$/g, "");
+      }
       const hash = window.location.hash.replace("#", "");
 
       // Check pathname first (e.g. /mickeys or /porsche-felca-gt)
@@ -100,13 +105,16 @@ export default function App() {
 
   const handleSelectCreature = (creature: PortfolioCreature) => {
     setSelectedCreature(creature);
-    window.history.pushState({ creatureSlug: creature.slug }, "", `/${creature.slug}`);
+    const baseUrl = getBaseUrl();
+    const prefix = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
+    window.history.pushState({ creatureSlug: creature.slug }, "", `${prefix}#${creature.slug}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleBackFromCreature = () => {
     setSelectedCreature(null);
-    window.history.pushState({}, "", "/#portfolio");
+    const baseUrl = getBaseUrl();
+    window.history.pushState({}, "", `${baseUrl}#portfolio`);
     setTimeout(() => {
       document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" });
     }, 60);
@@ -115,7 +123,8 @@ export default function App() {
   const handleNavigate = (id: string) => {
     if (selectedCreature) {
       setSelectedCreature(null);
-      window.history.pushState({}, "", `/#${id}`);
+      const baseUrl = getBaseUrl();
+      window.history.pushState({}, "", `${baseUrl}#${id}`);
       setTimeout(() => {
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       }, 60);
@@ -183,7 +192,7 @@ export default function App() {
             >
               <div className="relative w-full overflow-hidden bg-white">
                 <img 
-                  src="/images/olivier-pauwels-portrait.webp" 
+                  src={getAssetUrl("/images/olivier-pauwels-portrait.webp")} 
                   alt="Olivier Pauwels (BOHI)" 
                   className={`w-full h-auto object-cover object-[82%_center] block transition-all duration-1000 ease-out will-change-transform ${
                     isBannerInView 
@@ -202,7 +211,7 @@ export default function App() {
                   {/* Black BOHI Logo */}
                   <div className="w-full pointer-events-none select-none">
                     <img 
-                      src="/img/logos/bohiwit.png" 
+                      src={getAssetUrl("/img/logos/bohiwit.png")} 
                       alt="BOHI Logo" 
                       className="w-full h-auto object-contain filter brightness-0 opacity-95 mx-auto"
                     />
@@ -218,7 +227,7 @@ export default function App() {
                       title="The Boutique Gallery"
                     >
                       <img 
-                        src="/img/logos/theboutiquegallerylogo.webp" 
+                        src={getAssetUrl("/img/logos/theboutiquegallerylogo.webp")} 
                         alt="The Boutique Gallery Logo" 
                         className="w-[92%] h-auto object-contain block mix-blend-multiply mx-auto"
                       />
@@ -316,7 +325,7 @@ export default function App() {
                   {/* BOHI Logo */}
                   <div className="w-44 max-w-[70%] select-none">
                     <img 
-                      src="/img/logos/bohiwit.png" 
+                      src={getAssetUrl("/img/logos/bohiwit.png")} 
                       alt="BOHI Logo" 
                       className="w-full h-auto object-contain filter brightness-0 opacity-95 mx-auto"
                     />
@@ -332,7 +341,7 @@ export default function App() {
                       title="The Boutique Gallery"
                     >
                       <img 
-                        src="/img/logos/theboutiquegallerylogo.webp" 
+                        src={getAssetUrl("/img/logos/theboutiquegallerylogo.webp")} 
                         alt="The Boutique Gallery Logo" 
                         className="w-full h-auto object-contain block mix-blend-multiply mx-auto"
                       />

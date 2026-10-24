@@ -1,3 +1,5 @@
+import { getAssetUrl } from "../utils/asset";
+
 export interface PortfolioCreature {
   id: string;
   slug: string;
@@ -13,7 +15,7 @@ export interface PortfolioCreature {
   dimensions: string;
 }
 
-export const PORTFOLIO_CREATURES: PortfolioCreature[] = [
+const RAW_PORTFOLIO_CREATURES: PortfolioCreature[] = [
   {
     "id": "28",
     "slug": "mickeys",
@@ -647,3 +649,11 @@ export const PORTFOLIO_CREATURES: PortfolioCreature[] = [
     "dimensions": "54 x 48 x 26 cm"
   }
 ];
+
+export const PORTFOLIO_CREATURES: PortfolioCreature[] = RAW_PORTFOLIO_CREATURES.map((c) => ({
+  ...c,
+  thumb: getAssetUrl(c.thumb),
+  full: getAssetUrl(c.full),
+  images: c.images.map(getAssetUrl),
+}));
+

@@ -7,6 +7,7 @@ import {
   VolumeX, 
   ExternalLink 
 } from "lucide-react";
+import { getAssetUrl } from "../utils/asset";
 
 interface VideoState {
   src: string;
@@ -17,7 +18,7 @@ interface VideoState {
 }
 
 export default function StudioReels() {
-  const videoPath = "/images/reels/Amare_BOHI.mp4";
+  const videoPath = getAssetUrl("/images/reels/Amare_BOHI.mp4");
 
   const [video1, setVideo1] = useState<VideoState>({
     src: videoPath,

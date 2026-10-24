@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { MADMAX_IMAGES } from "../data";
 import { ChevronLeft, ChevronRight, Maximize2, X, Play, Pause, Youtube, ExternalLink } from "lucide-react";
+import { getAssetUrl } from "../utils/asset";
 
 interface SlideInfo {
   src: string;
@@ -8,7 +9,7 @@ interface SlideInfo {
   caption: string;
 }
 
-const MADMAX_SLIDES: SlideInfo[] = [
+const RAW_MADMAX_SLIDES: SlideInfo[] = [
   {
     src: "/img/madmax/1a.jpg",
     title: "Citadel War Relic",
@@ -70,6 +71,11 @@ const MADMAX_SLIDES: SlideInfo[] = [
     caption: "Finished tactical prop presented on location under Namibian desert lighting.",
   },
 ];
+
+const MADMAX_SLIDES: SlideInfo[] = RAW_MADMAX_SLIDES.map((s) => ({
+  ...s,
+  src: getAssetUrl(s.src),
+}));
 
 export default function MadMax() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -156,7 +162,7 @@ export default function MadMax() {
       {/* Background Image Layer from Portfolio */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
         <img
-          src="/img/portfolio/17-full.jpg"
+          src={getAssetUrl("/img/portfolio/17-full.jpg")}
           alt="V8 Hoover Plymouth — Sculpture by Olivier Pauwels"
           className="w-full h-full object-cover object-center opacity-35 sm:opacity-40 filter contrast-[1.05]"
         />
