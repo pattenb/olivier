@@ -4,49 +4,80 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Olivier Pauwels (BOHI) – Biomechanical & Steampunk Sculptures</title>
-    <meta name="description" content="Official portfolio of Belgian sculptor & visual artist Olivier Pauwels (BOHI). Explore monumental biomechanical sculptures, Mad Max: Fury Road movie art, and C-Baby series." />
-    <meta name="keywords" content="Olivier Pauwels, BOHI, Biomechanical Sculpture, Steampunk Art, Mad Max Fury Road Sculptures, Recycled Industrial Art, Contemporary Belgian Artist" />
+    <meta name="description" content="Explore monumental biomechanical sculptures, Mad Max: Fury Road film artifacts, and Cyber-Baby assemblages by Belgian artist Olivier Pauwels (BOHI)." />
+    <meta name="keywords" content="Olivier Pauwels, BOHI, Biomechanical Sculpture, Steampunk Art, Mad Max Fury Road Sculptures, Recycled Industrial Art, Contemporary Belgian Artist, Cyber-Baby" />
     <meta name="author" content="Olivier Pauwels (BOHI)" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://olivierpauwels.com/" />
     
     <!-- OpenGraph Social Cards -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://olivierpauwels.com/" />
     <meta property="og:title" content="Olivier Pauwels (BOHI) – Biomechanical & Steampunk Sculptures" />
-    <meta property="og:description" content="Explore monumental biomechanical sculptures, Mad Max: Fury Road film artifacts, and C-Baby assemblages by Belgian artist Olivier Pauwels (BOHI)." />
-    <meta property="og:image" content="/images/olivier-pauwels-portrait.webp" />
+    <meta property="og:description" content="Explore monumental biomechanical sculptures, Mad Max: Fury Road film artifacts, and Cyber-Baby assemblages by Belgian artist Olivier Pauwels (BOHI)." />
+    <meta property="og:image" content="https://olivierpauwels.com/images/olivier-pauwels-portrait.webp" />
+    <meta property="og:image:alt" content="Portrait of Belgian sculptor Olivier Pauwels (BOHI)" />
     <meta property="og:site_name" content="Olivier Pauwels (BOHI)" />
+    <meta property="og:locale" content="en_US" />
     
     <!-- Twitter / X Social Cards -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://olivierpauwels.com/" />
     <meta name="twitter:title" content="Olivier Pauwels (BOHI) – Biomechanical & Steampunk Sculptures" />
-    <meta name="twitter:description" content="Explore monumental biomechanical sculptures, Mad Max: Fury Road film artifacts, and C-Baby assemblages by Belgian artist Olivier Pauwels (BOHI)." />
-    <meta name="twitter:image" content="/images/olivier-pauwels-portrait.webp" />
+    <meta name="twitter:description" content="Explore monumental biomechanical sculptures, Mad Max: Fury Road film artifacts, and Cyber-Baby assemblages by Belgian artist Olivier Pauwels (BOHI)." />
+    <meta name="twitter:image" content="https://olivierpauwels.com/images/olivier-pauwels-portrait.webp" />
+    <meta name="twitter:image:alt" content="Portrait of Belgian sculptor Olivier Pauwels (BOHI)" />
 
-    <!-- Schema.org JSON-LD Structured Data for VisualArtist -->
+    <!-- Schema.org JSON-LD Structured Data for VisualArtist & Portfolio -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "VisualArtist",
-      "name": "Olivier Pauwels",
-      "alternateName": "BOHI",
-      "birthDate": "1974",
-      "birthPlace": {
-        "@type": "Place",
-        "name": "Ostend, Belgium"
-      },
-      "workLocation": {
-        "@type": "Place",
-        "name": "Middelkerke, Belgium"
-      },
-      "jobTitle": "Sculptor & Visual Artist",
-      "description": "Belgian artist and sculptor renowned for monumental biomechanical assemblages, C-Baby series, and industrial film sculptures for Mad Max: Fury Road.",
-      "image": "/images/olivier-pauwels-portrait.webp",
-      "sameAs": [
-        "https://www.facebook.com/OLIVIERPAUWELSlBOHI",
-        "https://instagram.com/olivier.pauwels.sculptures/",
-        "https://www.youtube.com/@olivierpauwels784/"
-      ],
-      "artMedium": "Sculpture, Biomechanical Assemblage, Recycled Industrial Metals",
-      "knowsAbout": ["Biomechanical Art", "Steampunk Sculpture", "Film Prop & Vehicle Design", "Recycled Art"]
+      "@graph": [
+        {
+          "@type": "VisualArtist",
+          "@id": "https://olivierpauwels.com/#artist",
+          "name": "Olivier Pauwels",
+          "alternateName": "BOHI",
+          "url": "https://olivierpauwels.com/",
+          "image": "https://olivierpauwels.com/images/olivier-pauwels-portrait.webp",
+          "birthDate": "1974",
+          "birthPlace": {
+            "@type": "Place",
+            "name": "Ostend, Belgium"
+          },
+          "workLocation": {
+            "@type": "Place",
+            "name": "Middelkerke, Belgium"
+          },
+          "jobTitle": "Sculptor & Visual Artist",
+          "description": "Belgian artist and sculptor renowned for monumental biomechanical assemblages, Cyber-Baby series, and apocalyptic vehicle sculptures for the six-time Oscar-winning film Mad Max: Fury Road (2015).",
+          "artMedium": "Sculpture, Biomechanical Assemblage, Recycled Industrial Metals, Salvaged Aviation Components",
+          "knowsAbout": [
+            "Biomechanical Sculpture",
+            "Steampunk Art",
+            "Mad Max: Fury Road Prop & Vehicle Design",
+            "Industrial Scrap Assemblage",
+            "Recycled Metal Art"
+          ],
+          "sameAs": [
+            "https://www.facebook.com/OLIVIERPAUWELSlBOHI",
+            "https://instagram.com/olivier.pauwels.sculptures/",
+            "https://www.youtube.com/@olivierpauwels784/"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://olivierpauwels.com/#website",
+          "url": "https://olivierpauwels.com/",
+          "name": "Olivier Pauwels (BOHI) – Official Sculpture Portfolio",
+          "description": "Official retrospective portfolio and archive of Belgian sculptor Olivier Pauwels (BOHI).",
+          "publisher": {
+            "@id": "https://olivierpauwels.com/#artist"
+          }
+        }
+      ]
     }
     </script>
 
@@ -55,8 +86,134 @@
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="root"></div>
+    <!-- 
+      PRE-RENDERED STATIC HTML OUTPUT (Anti-Empty-Shell Protocol)
+      Provides complete, indexable, semantic markup for search crawlers & automated audit bots
+      before JavaScript hydration mounts the interactive React application.
+    -->
+    <div id="root">
+      <header class="site-header">
+        <nav aria-label="Main Navigation">
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#madmax">Mad Max</a>
+          <a href="#books">Books</a>
+          <a href="#exhibitions">Exhibitions</a>
+          <a href="#reels">Reels</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <main>
+        <!-- HERO SECTION -->
+        <section id="home" aria-label="Introduction">
+          <h1>Where the life of an object stops… the dream world of the artist begins.</h1>
+          <p>Handcrafted steampunk and biomechanical sculptures forged from recycled industrial components by Belgian sculptor & visual artist Olivier Pauwels (BOHI).</p>
+          <a href="#portfolio">Explore The Collection</a>
+        </section>
+
+        <!-- ABOUT & BIOGRAPHY SECTION -->
+        <section id="about" aria-label="Biography">
+          <h2>About Olivier Pauwels (BOHI)</h2>
+          <p>Belgian artist Olivier Pauwels (°1974), also known by his moniker BOHI, was born in Ostend and works from his studio in Middelkerke. Armed with a degree in graphic arts, he began his career as a painter and graphic designer in the advertising sector before deliberately pursuing an autonomous path as a full-time sculptor. That transition paved the way for the intricate three-dimensional assemblages that define his work today—provocative sculptures that bridge the gap between imagination and social critique.</p>
+          <blockquote>
+            <p>“Where the life of an object stops… the dream world of the artist begins.”</p>
+          </blockquote>
+          <p>At the core of his artistic language is an ongoing confrontation between striking opposites: recycling versus throwaway culture, delicate vulnerability versus cold mechanical power, and playful humour versus simmering threat. Pauwels builds an apocalyptic visual trajectory using salvaged relics—from discarded aeroplane fragments and dismantled telephone booths to mechanical components—which he decontextualises and combines with gleaming stainless steel, cast polyester, and authentic historical artifacts. Every component sheds its original purpose to enter an entirely new identity.</p>
+          <p>The signature figures within this universe are his cyberbabies. Born from classic toy doll forms merged with heavy industrial machinery, these android creatures don authentic vintage helmets, harnesses, and military gear. In 2010, his visionary industrial assemblages caught the attention of director George Miller, leading to a major creative collaboration shaping the gritty tactile aesthetic of Mad Max: Fury Road (2015).</p>
+        </section>
+
+        <!-- SCULPTURE PORTFOLIO ARCHIVE -->
+        <section id="portfolio" aria-label="Sculpture Portfolio">
+          <h2>Biomechanical & Steampunk Sculpture Gallery</h2>
+          <p>Explore monumental sculptures, scale models, and industrial assemblages crafted by Olivier Pauwels.</p>
+          <ul>
+            <li>
+              <article>
+                <h3>Mickey's (2020)</h3>
+                <p>Cyber-Baby Assemblage. Featuring iconic curved ear silhouetted armatures, porcelain infant gaze, industrial vacuum manifold assemblies, and clockwork precision gears.</p>
+                <p>Materials: Salvaged porcelain infant doll, decommissioned aircraft manifold, 1940s brass ignition dials, steel gear assemblages, hand-patinated zinc rivets.</p>
+                <a href="#mickeys">View Mickey's Details</a>
+              </article>
+            </li>
+            <li>
+              <article>
+                <h3>Porsche Felca GT (2020)</h3>
+                <p>Kinetic Vehicle Assemblage. Sleek polished aluminum fuselage mounted with dual exhaust ports and cockpit instrumentation dials.</p>
+                <a href="#porsche-felca-gt">View Porsche Felca GT Details</a>
+              </article>
+            </li>
+            <li>
+              <article>
+                <h3>Marchal M12 (2018)</h3>
+                <p>Biomechanical Assemblage featuring vintage Marchal headlights and radial engine components.</p>
+                <a href="#marchal-m12">View Marchal M12 Details</a>
+              </article>
+            </li>
+            <li>
+              <article>
+                <h3>Bronze Mickey's (2021)</h3>
+                <p>Lost-wax cast bronze biomechanical baby sculpture with industrial patina.</p>
+                <a href="#bronze-mickeys">View Bronze Mickey's Details</a>
+              </article>
+            </li>
+            <li>
+              <article>
+                <h3>Manta MiG (2017)</h3>
+                <p>Aviation Assemblage from decommissioned MiG fighter jet airframes and aquatic manta wings.</p>
+                <a href="#manta-mig">View Manta MiG Details</a>
+              </article>
+            </li>
+            <li>
+              <article>
+                <h3>Maserati Dragster (2019)</h3>
+                <p>Supercharged dragster sculpture utilizing 1960s automotive manifolds and clockwork mechanics.</p>
+                <a href="#maserati-dragster">View Maserati Dragster Details</a>
+              </article>
+            </li>
+          </ul>
+        </section>
+
+        <!-- MAD MAX FURY ROAD COLLABORATION -->
+        <section id="madmax" aria-label="Mad Max: Fury Road Collaboration">
+          <h2>Mad Max: Fury Road Artifacts & Vehicle Sculptures</h2>
+          <p>In 2010, Academy Award-winning director George Miller approached Olivier Pauwels after discovering his dystopian industrial sculptures. Pauwels contributed original design concepts, vehicle armatures, and apocalyptic prop assemblages to the Warner Bros. blockbuster feature film Mad Max: Fury Road (2015), which went on to win six Oscars.</p>
+        </section>
+
+        <!-- PUBLICATIONS & MONOGRAPHS -->
+        <section id="books" aria-label="Publications and Monographs">
+          <h2>Printed Retrospective Volumes & Art Monographs</h2>
+          <p>Comprehensive documentation of Olivier Pauwels' biomechanical universe, featuring exclusive studio photography, engineering sketches, and signed collector monographs.</p>
+        </section>
+
+        <!-- SELECTED INTERNATIONAL EXHIBITIONS -->
+        <section id="exhibitions" aria-label="International Exhibitions">
+          <h2>Selected International Exhibitions</h2>
+          <p>From monumental installations across Belgium and the Netherlands to exhibitions in Melbourne, Copenhagen, and South Africa, discover where Olivier Pauwels' biomechanical world has come to life.</p>
+          <ul>
+            <li>2024: Solo Exhibition, Silt Casino & Event Venue, Middelkerke, Belgium</li>
+            <li>2023: The Boutique Gallery, Sint-Martens-Latem, Belgium</li>
+            <li>2022: Future Pass World Tour, Amsterdam & Antwerp</li>
+            <li>2019: Classic Event, Kortrijk Xpo, Belgium</li>
+            <li>2015: Mad Max: Fury Road Premiere & Film Art Exhibition</li>
+          </ul>
+        </section>
+
+        <!-- CONTACT & INQUIRIES -->
+        <section id="contact" aria-label="Studio Contact and Inquiries">
+          <h2>Studio Inquiries & Gallery Representation</h2>
+          <p>For acquisitions, museum exhibitions, and private commissions:</p>
+          <p>Representative Gallery: The Boutique Gallery (Sint-Martens-Latem, Belgium)</p>
+          <p>Artist Studio: Olivier Pauwels (BOHI), Middelkerke & Ostend, Belgium</p>
+        </section>
+      </main>
+
+      <footer>
+        <p>&copy; 2026 Olivier Pauwels (BOHI). All rights reserved. Created by StudioPB.</p>
+      </footer>
+    </div>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

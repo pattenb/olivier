@@ -149,6 +149,7 @@ export default function StudioReels() {
                   loop
                   muted={video1.isMuted}
                   playsInline
+                  preload="metadata"
                   className="w-full h-full object-cover select-none cursor-pointer"
                   onClick={() => togglePlay(1)}
                 />
@@ -217,6 +218,7 @@ export default function StudioReels() {
                   loop
                   muted={video2.isMuted}
                   playsInline
+                  preload="metadata"
                   className="w-full h-full object-cover select-none cursor-pointer"
                   onClick={() => togglePlay(2)}
                 />

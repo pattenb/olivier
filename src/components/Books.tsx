@@ -122,6 +122,7 @@ export default function Books() {
                   alt={book.title}
                   className="w-full h-full object-contain drop-shadow transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
+                  decoding="async"
                 />
 
                 {/* Subtle Status Pill */}

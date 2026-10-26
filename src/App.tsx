@@ -8,16 +8,60 @@ import StudioReels from "./components/StudioReels";
 import Biography from "./components/Biography";
 import MadMax from "./components/MadMax";
 import Books from "./components/Books";
+import NotFound from "./components/NotFound";
+import ObfuscatedEmail from "./components/ObfuscatedEmail";
 import { PORTFOLIO_CREATURES, PortfolioCreature } from "./data/portfolioData";
 import { Mail, Instagram, Facebook, Youtube, ArrowUp, Send, CheckCircle2, ChevronRight, MessageSquareCode, ZoomIn, X } from "lucide-react";
 import { getAssetUrl, getBaseUrl } from "./utils/asset";
 
 export default function App() {
   const [selectedCreature, setSelectedCreature] = useState<PortfolioCreature | null>(null);
+  const [is404, setIs404] = useState<boolean>(false);
   const [isPortraitZoomed, setIsPortraitZoomed] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [isBannerInView, setIsBannerInView] = useState(false);
   const bannerRef = useRef<HTMLDivElement>(null);
+
+  // SEO & Social Cards Dynamic Synchronization
+  useEffect(() => {
+    const metaDesc = document.querySelector('meta[name="description"]');
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    const twitterDesc = document.querySelector('meta[name="twitter:description"]');
+
+    if (is404) {
+      const notFoundTitle = "Artifact Not Found (404) | Olivier Pauwels (BOHI)";
+      const notFoundDesc = "The requested sculpture artifact could not be found in the Olivier Pauwels portfolio archive.";
+      document.title = notFoundTitle;
+      if (metaDesc) metaDesc.setAttribute("content", notFoundDesc);
+      if (ogTitle) ogTitle.setAttribute("content", notFoundTitle);
+      if (ogDesc) ogDesc.setAttribute("content", notFoundDesc);
+      if (twitterTitle) twitterTitle.setAttribute("content", notFoundTitle);
+      if (twitterDesc) twitterDesc.setAttribute("content", notFoundDesc);
+      return;
+    }
+
+    if (selectedCreature) {
+      const pageTitle = `${selectedCreature.title} (${selectedCreature.year}) | Olivier Pauwels (BOHI) Sculpture`;
+      const pageDesc = `${selectedCreature.title} (${selectedCreature.year}) by Belgian sculptor Olivier Pauwels (BOHI) – ${selectedCreature.category}. Materials: ${selectedCreature.materials.slice(0, 3).join(", ")}. Dimensions: ${selectedCreature.dimensions}.`;
+      document.title = pageTitle;
+      if (metaDesc) metaDesc.setAttribute("content", pageDesc);
+      if (ogTitle) ogTitle.setAttribute("content", pageTitle);
+      if (ogDesc) ogDesc.setAttribute("content", pageDesc);
+      if (twitterTitle) twitterTitle.setAttribute("content", pageTitle);
+      if (twitterDesc) twitterDesc.setAttribute("content", pageDesc);
+    } else {
+      const defaultTitle = "Olivier Pauwels (BOHI) – Biomechanical & Steampunk Sculptures";
+      const defaultDesc = "Official portfolio of Belgian sculptor & visual artist Olivier Pauwels (BOHI). Explore monumental biomechanical sculptures, Mad Max: Fury Road movie art, and C-Baby series.";
+      document.title = defaultTitle;
+      if (metaDesc) metaDesc.setAttribute("content", defaultDesc);
+      if (ogTitle) ogTitle.setAttribute("content", defaultTitle);
+      if (ogDesc) ogDesc.setAttribute("content", defaultDesc);
+      if (twitterTitle) twitterTitle.setAttribute("content", defaultTitle);
+      if (twitterDesc) twitterDesc.setAttribute("content", defaultDesc);
+    }
+  }, [selectedCreature, is404]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -64,6 +108,8 @@ export default function App() {
       }
       const hash = window.location.hash.replace("#", "");
 
+      const knownSections = ["home", "about", "portfolio", "madmax", "books", "exhibitions", "reels", "biography-images", "contact"];
+
       // Check pathname first (e.g. /mickeys or /porsche-felca-gt)
       if (path && path !== "index.html") {
         const found = PORTFOLIO_CREATURES.find(
@@ -75,8 +121,24 @@ export default function App() {
         );
         if (found) {
           setSelectedCreature(found);
+          setIs404(false);
           return;
         }
+
+        // If path is a known section anchor
+        if (knownSections.includes(path.toLowerCase())) {
+          setSelectedCreature(null);
+          setIs404(false);
+          setTimeout(() => {
+            document.getElementById(path.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
+          }, 60);
+          return;
+        }
+
+        // If pathname does not match anything valid -> 404
+        setSelectedCreature(null);
+        setIs404(true);
+        return;
       }
 
       // Check hash fallback (e.g. #mickeys or #creature-28)
@@ -87,11 +149,19 @@ export default function App() {
         );
         if (found) {
           setSelectedCreature(found);
+          setIs404(false);
+          return;
+        }
+
+        if (knownSections.includes(hash.toLowerCase())) {
+          setSelectedCreature(null);
+          setIs404(false);
           return;
         }
       }
 
       setSelectedCreature(null);
+      setIs404(false);
     };
 
     parseRoute();
@@ -121,6 +191,7 @@ export default function App() {
   };
 
   const handleNavigate = (id: string) => {
+    setIs404(false);
     if (selectedCreature) {
       setSelectedCreature(null);
       const baseUrl = getBaseUrl();
@@ -145,7 +216,9 @@ export default function App() {
 
       {/* Primary Content View */}
       <main className="flex-grow">
-        {selectedCreature ? (
+        {is404 ? (
+          <NotFound onGoHome={() => handleNavigate("portfolio")} />
+        ) : selectedCreature ? (
           <div id="creature-view">
             <CreaturePage
               creature={selectedCreature}
@@ -222,7 +295,7 @@ export default function App() {
                     <a 
                       href="https://theboutiquegallery.com/" 
                       target="_blank" 
-                      rel="noopener noreferrer" 
+                      rel="noopener noreferrer nofollow" 
                       className="w-full block hover:opacity-85 transition-opacity"
                       title="The Boutique Gallery"
                     >
@@ -232,12 +305,11 @@ export default function App() {
                         className="w-[92%] h-auto object-contain block mix-blend-multiply mx-auto"
                       />
                     </a>
-                    <a 
-                      href="mailto:latem@theboutiquegallery.be" 
+                    <ObfuscatedEmail
+                      user="latem"
+                      domain="theboutiquegallery.be"
                       className="font-serif text-sm md:text-base text-black hover:text-zinc-700 transition-colors block font-medium leading-tight"
-                    >
-                      latem@theboutiquegallery.be
-                    </a>
+                    />
                     <a 
                       href="tel:+32470030502" 
                       className="font-sans text-[11px] text-black/80 hover:text-black transition-colors block font-normal tracking-wide leading-tight"
@@ -251,12 +323,11 @@ export default function App() {
                     <span className="font-sans text-[11px] font-semibold tracking-[0.2em] text-black uppercase block">
                       STUDIO INQUIRIES
                     </span>
-                    <a 
-                      href="mailto:Info@OlivierPauwels.com" 
+                    <ObfuscatedEmail
+                      user="Info"
+                      domain="OlivierPauwels.com"
                       className="font-serif text-[16px] leading-[20px] text-black hover:text-zinc-700 transition-colors block font-medium"
-                    >
-                      Info@OlivierPauwels.com
-                    </a>
+                    />
                     <p className="font-sans text-xs text-black/80 font-normal tracking-wide leading-tight">
                       Ostend, Belgium · GCV. 0664.601.636
                     </p>
@@ -270,7 +341,7 @@ export default function App() {
                   <a 
                     href="https://studiopb.be" 
                     target="_blank" 
-                    rel="noopener noreferrer" 
+                    rel="noopener noreferrer nofollow" 
                     className="font-medium text-black hover:underline"
                   >
                     StudioPB
@@ -287,7 +358,7 @@ export default function App() {
                       <a 
                         href="https://www.facebook.com/OLIVIERPAUWELSlBOHI" 
                         target="_blank" 
-                        rel="noopener noreferrer" 
+                        rel="noopener noreferrer nofollow" 
                         aria-label="Facebook"
                         className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black hover:bg-zinc-800 text-white flex items-center justify-center transition-all shadow-xs"
                       >
@@ -296,7 +367,7 @@ export default function App() {
                       <a 
                         href="https://instagram.com/olivier.pauwels.sculptures/" 
                         target="_blank" 
-                        rel="noopener noreferrer" 
+                        rel="noopener noreferrer nofollow" 
                         aria-label="Instagram"
                         className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black hover:bg-zinc-800 text-white flex items-center justify-center transition-all shadow-xs"
                       >
@@ -305,7 +376,7 @@ export default function App() {
                       <a 
                         href="https://www.youtube.com/@olivierpauwels784/" 
                         target="_blank" 
-                        rel="noopener noreferrer" 
+                        rel="noopener noreferrer nofollow" 
                         aria-label="YouTube"
                         className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black hover:bg-zinc-800 text-white flex items-center justify-center transition-all shadow-xs"
                       >
@@ -336,7 +407,7 @@ export default function App() {
                     <a 
                       href="https://theboutiquegallery.com/" 
                       target="_blank" 
-                      rel="noopener noreferrer" 
+                      rel="noopener noreferrer nofollow" 
                       className="w-40 max-w-[65%] block hover:opacity-85 transition-opacity mb-1"
                       title="The Boutique Gallery"
                     >
@@ -346,12 +417,11 @@ export default function App() {
                         className="w-full h-auto object-contain block mix-blend-multiply mx-auto"
                       />
                     </a>
-                    <a 
-                      href="mailto:latem@theboutiquegallery.be" 
+                    <ObfuscatedEmail
+                      user="latem"
+                      domain="theboutiquegallery.be"
                       className="font-serif text-sm text-black hover:text-zinc-700 transition-colors block font-medium"
-                    >
-                      latem@theboutiquegallery.be
-                    </a>
+                    />
                     <a 
                       href="tel:+32470030502" 
                       className="font-sans text-xs text-black/80 hover:text-black transition-colors block font-normal tracking-wide"
@@ -365,12 +435,11 @@ export default function App() {
                     <span className="font-sans text-[11px] font-semibold tracking-[0.2em] text-black uppercase block">
                       STUDIO INQUIRIES
                     </span>
-                    <a 
-                      href="mailto:Info@OlivierPauwels.com" 
+                    <ObfuscatedEmail
+                      user="Info"
+                      domain="OlivierPauwels.com"
                       className="font-serif text-base text-black hover:text-zinc-700 transition-colors block font-medium"
-                    >
-                      Info@OlivierPauwels.com
-                    </a>
+                    />
                     <p className="font-sans text-xs text-black/80 font-normal tracking-wide">
                       Ostend, Belgium · GCV. 0664.601.636
                     </p>
@@ -379,7 +448,7 @@ export default function App() {
                       <a 
                         href="https://studiopb.be" 
                         target="_blank" 
-                        rel="noopener noreferrer" 
+                        rel="noopener noreferrer nofollow" 
                         className="font-medium text-black hover:underline"
                       >
                         StudioPB
@@ -396,7 +465,7 @@ export default function App() {
                       <a 
                         href="https://www.facebook.com/OLIVIERPAUWELSlBOHI" 
                         target="_blank" 
-                        rel="noopener noreferrer" 
+                        rel="noopener noreferrer nofollow" 
                         aria-label="Facebook"
                         className="w-9 h-9 rounded-full bg-black hover:bg-zinc-800 text-white flex items-center justify-center transition-all shadow-xs"
                       >
@@ -405,7 +474,7 @@ export default function App() {
                       <a 
                         href="https://instagram.com/olivier.pauwels.sculptures/" 
                         target="_blank" 
-                        rel="noopener noreferrer" 
+                        rel="noopener noreferrer nofollow" 
                         aria-label="Instagram"
                         className="w-9 h-9 rounded-full bg-black hover:bg-zinc-800 text-white flex items-center justify-center transition-all shadow-xs"
                       >
@@ -414,7 +483,7 @@ export default function App() {
                       <a 
                         href="https://www.youtube.com/@olivierpauwels784/" 
                         target="_blank" 
-                        rel="noopener noreferrer" 
+                        rel="noopener noreferrer nofollow" 
                         aria-label="YouTube"
                         className="w-9 h-9 rounded-full bg-black hover:bg-zinc-800 text-white flex items-center justify-center transition-all shadow-xs"
                       >

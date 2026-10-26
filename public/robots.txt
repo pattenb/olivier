@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap indexing
+Sitemap: https://olivierpauwels.com/sitemap.xml

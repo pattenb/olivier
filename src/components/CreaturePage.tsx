@@ -126,6 +126,8 @@ export default function CreaturePage({
             alt={`${creature.title} - Full Picture`}
             className="max-h-[78vh] lg:max-h-[86vh] w-auto max-w-full object-contain select-none drop-shadow-2xl transition-all duration-700 ease-out"
             loading="eager"
+            fetchPriority="high"
+            decoding="async"
           />
         </div>
 
@@ -428,6 +430,7 @@ export default function CreaturePage({
                     alt={`${creature.title} - Plate ${idx + 1}`}
                     className="max-h-[82vh] w-auto max-w-full object-contain select-none transition-transform duration-700 group-hover:scale-[1.01]"
                     loading="lazy"
+                    decoding="async"
                   />
                   <div className="w-full flex items-center justify-between text-white/70 font-sans text-xs pt-4 border-t border-white/10 mt-4">
                     <span className="tracking-widest uppercase">

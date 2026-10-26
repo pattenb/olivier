@@ -37,6 +37,8 @@ export default function Biography() {
           src={getAssetUrl("/img/portfolio/19-full.jpg")} 
           alt="Marchal M12 — Sculpture by Olivier Pauwels" 
           className="w-full h-full object-cover object-center opacity-35 sm:opacity-40 filter contrast-[1.05]"
+          loading="lazy"
+          decoding="async"
         />
         {/* Soft white gradient fade ensuring maximum text contrast & readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/60 to-white/90" />

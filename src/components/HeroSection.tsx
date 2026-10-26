@@ -120,6 +120,7 @@ export default function HeroSection() {
               }}
               loading={index === 0 ? "eager" : "lazy"}
               fetchPriority={index === 0 ? "high" : "auto"}
+              decoding="async"
               referrerPolicy="no-referrer"
             />
           </div>

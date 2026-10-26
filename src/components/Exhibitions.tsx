@@ -58,6 +58,8 @@ export default function Exhibitions() {
           src={getAssetUrl("/images/kunstenaar-olivier-pauwels-bij-zijn-creatie.jpeg")}
           alt="Olivier Pauwels Exhibition"
           className="w-full h-full object-cover object-center sm:object-[center_28%] opacity-30 sm:opacity-35 filter contrast-[1.1] grayscale-25"
+          loading="lazy"
+          decoding="async"
         />
         {/* Soft editorial white gradient overlay ensuring clean readability and high contrast */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/80 to-white/95 backdrop-blur-[0.5px]" />

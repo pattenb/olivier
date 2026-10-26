@@ -118,6 +118,7 @@ export default function Gallery({ onSelectCreature }: GalleryProps) {
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out select-none drop-shadow-sm rounded-lg"
                   loading="lazy"
+                  decoding="async"
                 />
 
                 {/* Status Badge */}
