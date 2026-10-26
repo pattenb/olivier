@@ -222,7 +222,7 @@ export default function App() {
           <div id="creature-view">
             <CreaturePage
               creature={selectedCreature}
-              allCreatures={PORTFOLIO_CREATURES}
+              allCreatures={PORTFOLIO_CREATURES.slice(0, 16)}
               onBack={handleBackFromCreature}
               onSelectCreature={handleSelectCreature}
             />

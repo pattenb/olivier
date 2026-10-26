@@ -3,9 +3,10 @@ import { PORTFOLIO_CREATURES, PortfolioCreature } from "../data/portfolioData";
 
 interface GalleryProps {
   onSelectCreature: (creature: PortfolioCreature) => void;
+  limit?: number;
 }
 
-export default function Gallery({ onSelectCreature }: GalleryProps) {
+export default function Gallery({ onSelectCreature, limit = 16 }: GalleryProps) {
   const [filter, setFilter] = useState<string>("ALL");
   const [inView, setInView] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -21,12 +22,14 @@ export default function Gallery({ onSelectCreature }: GalleryProps) {
     return () => observer.disconnect();
   }, []);
 
-  const availableCount = PORTFOLIO_CREATURES.filter(
+  const displayedCreatures = PORTFOLIO_CREATURES.slice(0, limit);
+
+  const availableCount = displayedCreatures.filter(
     (c) => c.status.toLowerCase() === "available"
   ).length;
-  const acquiredCount = PORTFOLIO_CREATURES.length - availableCount;
+  const acquiredCount = displayedCreatures.length - availableCount;
 
-  const filteredItems = PORTFOLIO_CREATURES.filter((item) => {
+  const filteredItems = displayedCreatures.filter((item) => {
     if (filter === "ALL") return true;
     if (filter === "AVAILABLE") return item.status.toLowerCase() === "available";
     if (filter === "ACQUIRED") return item.status.toLowerCase() !== "available";
@@ -68,7 +71,7 @@ export default function Gallery({ onSelectCreature }: GalleryProps) {
                   : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100"
               }`}
             >
-              ALL ({PORTFOLIO_CREATURES.length})
+              ALL ({displayedCreatures.length})
             </button>
             <button
               onClick={() => setFilter("AVAILABLE")}
